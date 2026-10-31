@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boovochat</title>
+<style>
+  body{{margin:0;font-family:-apple-system,system-ui,sans-serif;background:#1E2026;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px}}
+  .card{{max-width:340px}}
+  h1{{font-size:22px;margin:0 0 8px;font-weight:900;letter-spacing:-0.3px}}
+  p{{color:#A0A5B5;font-size:14px;line-height:20px;margin:0 0 20px}}
+  a{{display:inline-block;background:#5B73E8;color:#fff;text-decoration:none;padding:14px 24px;border-radius:14px;font-weight:900;font-size:15px}}
+  small{{display:block;color:#6B7280;font-size:11px;margin-top:16px}}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Abrindo Boovochat...</h1>
+  <p>Se o app não abrir automaticamente, instale pela Play Store.</p>
+  <a id="play" href="https://play.google.com/store/apps/details?id=com.boovo.android">Ir para Play Store</a>
+  <small id="code">Código: </small>
+</div>
+<script>
+  var path = location.pathname.split("/").filter(Boolean);
+  var type = path[0] || "ref";
+  var id = path[1] || "";
+  var deeplink = "boovo://" + type + "/" + id;
+  document.getElementById("code").textContent = "Código: " + id;
+
+  var opened = false;
+  window.addEventListener("blur", function() {{ opened = true; }});
+  window.location.href = deeplink;
+
+  setTimeout(function() {{
+    if (!opened) window.location.href = "https://play.google.com/store/apps/details?id=com.boovo.android";
+  }}, 1500);
+</script>
+</body>
+</html>
